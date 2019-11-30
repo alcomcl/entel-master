@@ -1,0 +1,71 @@
+{% extends 'base/base.html'%}
+{% load staticfiles %}
+
+{% block title %}Entel - Detalle del Vendedor {% endblock %}
+
+{% block content %}
+<p class="titulo-vendedor-detalle">DETALLE VENDEDOR ASOCIADO ROL N° : {{ usuario.id }}</p>
+<p class="fecha-actual"> Fecha Actual: {% now | %}</p><p id="reloj">  </p>
+
+{% if messages %}
+<ul class="messages list-group mb-3">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }} list-group-item list-group-item-primary" {% endif %}>
+        {{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr  class="col-general">
+
+            <td scope="col">ROL</td>
+            <td scope="col">NOMBRE</td>
+            <td scope="col">APELLIDO PATERNO</td>
+            <td scope="col">APELLIDO MATERNO</td>
+            <td scope="col">CORREO</td>
+            <td scope="col">FECHA NACIMIENTO</td>
+            <td scope="col">ESTADO VENDEDOR</td>
+            <td scope="col">ADMIN</td>
+            <td scope="col">ACCIONES</td>
+        </tr>
+
+    </thead>
+    <tbody>
+        
+        <tr  class="row-general" >
+
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.apellido_paterno }}</td>
+            <td>{{ usuario.apellido_materno }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.fecha_nacimiento }}</td>
+            {% if usuario.active == True %}
+                <td><img id="check-success" src="{% static 'img/success.png' %}"></td>
+            {% else %}
+                <td><td><img id="check-error" src="{% static 'img/error.png' %}"></td></td>
+            {% endif %}
+            {% if usuario.admin == True %}
+                <td><img id="check-success" src="{% static 'img/success.png' %}"></td>
+            {% else %}
+                <td><img id="check-error" src="{% static 'img/error.png' %}"></td>
+            {% endif %}
+            <td>
+                <form method="POST" action="{% url 'vendedor:eliminar_vendedor' usuario.id %}">
+                    {% csrf_token %}
+                    <div class="btn-group">
+                        <a href="{% url 'vendedor:editar_vendedor' usuario.id %}" title="Editar" type="button"
+                            class="btn btn-primary">Editar </a>
+                        <button class="btn btn-danger" onclick="return eliminar();" type="submit">Eliminar</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="btn-group">
+    <a href="{% url 'vendedor:listar_vendedor' %}" title="Ver" type="button" class="btn btn-success">VOLVER</a>        
+</div>
+{% endblock %}

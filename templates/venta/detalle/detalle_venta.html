@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Entel - Detalle Venta {% endblock %}
+
+{% block content %}
+<p class="titulo-producto-detalle">DETALLE VENTA ASOCIADO AL VENDEDOR N° : {{ venta.id_venta.vendedor }}</p>
+<p class="fecha-actual"> Fecha Actual: {% now "d-m-Y |   P" %}</p>
+
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr class="col-general">
+            
+            <td scope="col">ID VENTA</td>
+            <td scope="col">ID PRODUCTO</td>
+            <td scope="col">PRODUCTO</td>
+            <td scope="col">VALOR UNIDAD</td>
+            <td scope="col">CATEGORIA</td>
+            <td scope="col">CANTIDAD</td>
+        </tr>
+
+    </thead>
+    <tbody>
+        {% if venta %} <!---Desde views.py de gestionProducto y desde la clase VendedorList, ListView nos envia un object_list-->
+            {% load humanize %}
+                <tr class="row-general">
+                    
+                    <td>{{ venta.id }}</td>
+                    <td>{{ venta.id_producto.id }}</td>
+                    <td>{{ venta.id_producto.nombre }}</td>
+                    <td ><strong>${{ venta.id_producto.precio|intcomma }}</strong></td>
+                    <td>{{ venta.id_producto.tipoProducto.nombre }}</td>
+                    <td>{{ venta.cant_producto }}</td>
+                    
+                    <td>
+                    </td>
+                </tr>
+                
+            
+        {% else %}
+            <h2>No existe el detalle</h2>
+        {% endif %}
+    </tbody>
+</table>
+<a class="btn btn-success" href="{% url 'venta:listar_venta' %}">VOLVER</a>
+{% endblock %}

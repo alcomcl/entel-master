@@ -1,0 +1,55 @@
+{% extends 'base/base.html'%}
+{% load staticfiles %}
+
+{% block extrastatic %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tipo_producto.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block title %}Entel - Login{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img id="img_titulo" src="{% static 'img/notebook-computer.png' %}">
+    <a class="navbar-brand" href="#">ENTEL</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+        aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#"></a>
+            </li>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2><strong>LOGIN DE USUARIOS</strong></h2>
+    </div>
+    <div class="card-body card-block">
+        <form method="POST" class="form-signin">
+            {% csrf_token %}
+
+            <label for="username">Correo</label>
+            <input type="email" class="form-control" placeholder="Correo Electronico" name="username" required
+                autofocus>
+            <label id="label-pass" for="password">Contraseña</label>
+            <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
+
+            <button id="ingresar" class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+            <a id="registrar" class="btn btn-lg btn-primary btn-block" href="{% url 'vendedor:crear_vendedor' %}">Registrate</a>
+
+            <p class="mt-5 mb-3 text-muted">&copy;Entel - Todos los derechos Reservados</p>
+        </form>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endblock %}

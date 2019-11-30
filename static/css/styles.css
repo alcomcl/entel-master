@@ -1,0 +1,101 @@
+/*GENERAL*/
+
+    .col-general{
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .row-general{
+        font-size: 12px;
+        text-align: center;
+    }
+
+/*******************************************/
+
+/* TEMPLATES BASE.HTML*/
+
+    .caja-cerra-sesion{
+        margin-left: 85%;
+        margin-bottom: 0px;
+    }
+
+    #titulo_pro_list {
+
+        margin-top: 25px;
+        color: solid;
+    }
+
+#titulo_ven_list {
+
+    margin-top: 25px;
+    color: solid;
+
+}
+
+.navbar {
+    border-bottom: solid;
+}
+
+.card {
+    margin-top: 25px;
+}
+
+.card h2 {
+    text-align: center;
+}
+
+#img_titulo {
+    margin-right: 15px;
+}
+
+#btn-crear_tipo {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#barra-sesion {
+    clear: both;
+    padding: 0px;
+    
+}
+
+#barra-sesion li {
+    display: block;
+}
+
+#barra-sesion li a {
+    border: 1px solid;
+    font-family: Arial;
+    font-size: 11px;
+    text-decoration: none;
+    float: right;
+    padding: 10px;
+    background-color: #F8F9FA;
+    color: black;
+    
+}
+
+#col-listar-vendedor{
+    font-size: 15px;
+}
+
+#row-listar-vendedor{
+    font-size: 15px;
+}
+
+
+/****Vendedor Registro****/
+
+#calendario{
+    width: 35%;
+    margin-left: 58px;
+}
+/*
+#password1{
+    width: 35%;
+    margin-left: 10px;
+}
+
+*/
+    

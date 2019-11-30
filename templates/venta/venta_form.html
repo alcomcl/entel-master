@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Entel - Generar Venta {% endblock %}
+
+{% block content %}
+
+<!--Inicio mensajes de error-->
+{% if form.errors %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<div class="alert alert-danger" role="alert">
+    {{ error|escape }}
+</div>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+<!--Fin mensajes de error-->
+
+
+
+
+<form method="POST">
+    {% csrf_token %}
+    {% load formulario %}
+    {% productos as producto %}
+    {% if error %}
+        <h2>{{ error }}</h2>
+    {% else %}
+    
+    <div class="card">
+        <div class="card-header">
+            <h2><strong>Modulo Venta</strong></h2>
+        </div>
+        <div class="card-body card-block">
+            <form action="{% url 'venta:crear_venta' %}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.vendedor.label }}</div>
+                    <div class="col-12 col-md-9">{{ form.vendedor }}</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.producto.label }}</div>
+                    <div class="input-group">                      
+                        <select name="producto" class="form-control " multiple="multiple" onchange="selectFunction(event)"
+                            required>
+                            {% for item in producto %}
+                            <option data-typeid="{{item.precio}}" value="{{item.id}}">{{item}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>            
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.total_venta.label }}</div>
+                     <input type="number" id="total_venta" class="form-control" name="total_venta" placeholder="Total" readonly required value="{ form.total_venta }">
+        <br><br><br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Generar Venta</button>
+                    <a href="{% url 'venta:listar_venta' %}" type="reset" class="btn btn-danger">Cancelar</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    {% endif %}
+    
+</form>
+<script>
+    function selectFunction(e) {
+        var type_id = $('select option:selected').map(function () {
+                return $(this).attr('data-typeid');
+            })
+            .get().map(parseFloat).reduce(function (a, b) {
+                return a + b
+            });
+        console.log(type_id)
+        $("#total_venta").val(type_id);
+    }
+</script>
+{% endblock content %}
+

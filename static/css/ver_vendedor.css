@@ -1,0 +1,21 @@
+
+
+.titulo-vendedor-detalle{
+    font-weight: bold;
+}
+
+#check-success{
+    height: 30px;
+}
+
+#check-error{
+    height: 30px;
+}
+
+
+.fecha-actual{
+    display: block;
+    margin-top: 0px;
+    margin-left: 0%;
+    font-size: 11px;
+}

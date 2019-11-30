@@ -1,0 +1,20 @@
+
+
+#cabezera-listar-producto{
+    font-weight: bold;
+}
+
+#row-listar-producto{
+    text-align: center;
+    font-size: 14px;
+}
+
+.btn-group {
+    margin-bottom: 20px;
+}
+
+.container #reloj{
+    margin: 0px auto;
+    margin-top: -16px;
+    margin-bottom: 14px;
+}

@@ -1,0 +1,45 @@
+{% extends 'base/base.html'%}
+{% load staticfiles %}
+
+{% block title %}Entel - Detalle del Producto {% endblock %}
+
+{% block content %}
+<p class="titulo-producto-detalle">DETALLE PRODUCTO ASOCIADO CODIGO N° : {{ producto.id }}</p>
+<p class="fecha-actual"> Fecha Actual: {% now | %}</p><p id="reloj">  </p>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr class="col-general">
+            
+            <td scope="col"><strong>ID</strong></td>
+            <td scope="col"><strong>DESCRIPCION DEL PRODUCTO</strong></td>
+            <td scope="col"><strong>CATEGORIA</strong></td>
+            <td scope="col"><strong>PRECIO</strong></td>
+            <td scope="col"><strong>ACCIONES</strong></td>
+        </tr>
+
+    </thead>
+    <tbody>
+                <tr id="row-detalle-producto">
+                    <td>{{ producto.id }}</td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.tipoProducto.nombre}}</td>
+                        {% load humanize %} <!--django.contrib.humanize   : Un conjunto de filtros de plantilla de Django útiles para agregar un "toque humano" a los datos.-->
+                    <td style="color:#007BFF; font-size: 20px; ">${{ producto.precio|intcomma }}</td>
+                    <td>
+                       <form method="POST" action="{% url 'producto:eliminar_producto' producto.id %}">
+                        {% csrf_token %}
+                        <div class="btn-group">
+                            <a href="{% url 'producto:editar_producto' producto.id %}" title="Editar" type="button" class="btn btn-primary">Editar </a>
+                            <button class="btn btn-danger" onclick="return eliminar();" type="submit">Eliminar</button>
+                        </div>
+                        </form>
+                    </td>
+                </tr> 
+    </tbody>
+</table>
+<div class="btn-group">
+        <a href="{% url 'producto:listar_producto' %}" title="Ver" type="button" class="btn btn-success">VOLVER</a>        
+</div>
+
+{% endblock %}

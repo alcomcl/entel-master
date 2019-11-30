@@ -1,0 +1,64 @@
+{% extends 'base/base.html'%}
+{% load staticfiles %}
+
+{% block title %}Entel - Listado de Vendedores {% endblock %}
+
+{% block content %}
+<p id="cabezera-listar-vendedor">MANTENEDOR VENDEDORES</p>
+<span class="user-ver-vendedor">Usuario: {{ user.nombre }} {{ user.apellido_paterno }} {{ user.apellido_materno}}</span>
+<p class="fecha-actual"> Fecha Actual: {% now | %}</p><p id="reloj">  </p>
+
+<div class="btn-group">
+    <a href="{% url 'vendedor:crear_vendedor' %}" title="Ver" type="button" class="btn btn-success">INGRESAR NUEVO
+        VENDEDOR</a>
+</div>
+
+{% if messages %}
+<ul class="messages list-group mb-3">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }} list-group-item list-group-item-primary" {% endif %}>
+        {{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr class="col-general">
+            
+            <td scope="col"><strong>ROL</strong></td>
+            <td scope="col"><strong>EMAIL</strong></td>
+            <td scope="col"><strong>FECHA NACIMIENTO</strong></td>
+            <td scope="col"><strong>ACCIONES</strong></td>
+            
+        </tr>
+
+    </thead>
+    <tbody>
+        {% if usuarios %}
+        <!---Desde views.py de gestionVendedor y desde la clase VendedorList, ListView nos envia un object_list-->
+        {% for usuario in usuarios %}
+        <tr id="row-listar-vendedor"> 
+
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.fecha_nacimiento }}</td>
+            <td>
+                <form method="POST" action="{% url 'vendedor:eliminar_vendedor' usuario.id %}">
+                    {% csrf_token %}
+                    <div class="btn-group">
+                        <a href="{% url 'vendedor:ver_vendedor' usuario.id %}" title="Ver" type="button" class="btn btn-success">Ver </a>
+                        <a href="{% url 'vendedor:editar_vendedor' usuario.id %}" title="Editar" type="button" class="btn btn-primary">Editar </a>
+                        <button class="btn btn-danger" onclick="return eliminar();" type="submit">Eliminar</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <h2>No hay Vendedores Registrados</h2>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock %}

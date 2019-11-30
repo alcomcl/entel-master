@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Entel - Listado de Ventas {% endblock %}
+
+{% block content %}
+<p id="cabezera-listar-producto">LISTADO VENTAS</p> 
+<span class="user-ver-vendedor">Usuario: {{ user.nombre }} {{ user.apellido_paterno }} {{ user.apellido_materno}}</span>
+<p class="fecha-actual"> Fecha Actual: {% now | %}</p><p id="reloj">  </p>
+
+<div class="btn-group">
+    <a href="{% url 'venta:crear_venta' %}" title="Ver" type="button" class="btn btn-success">Iniciar Nueva Venta</a>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr class="col-general">
+            
+            <td scope="col">ID VENTA</td>
+            <td scope="col">FECHA</td>
+            <td scope="col">VENDEDOR RESPONSABLE</td>
+            <td scope="col">PRECIO VENTA</td>
+            <td scope="col">ACCIONES</td>
+        </tr>
+
+    </thead>
+    <tbody>
+        {% if object_list %} <!---Desde views.py de gestionProducto y desde la clase VendedorList, ListView nos envia un object_list-->
+            {% for venta in object_list %}
+                <tr class="row-general">
+                    
+                    <td>{{ venta.id }}</td>
+                    <td>{{ venta.fecha|date:'d-m-Y  H:i' }}</td>
+                    <td>{{ venta.vendedor.nombre}} {{ venta.vendedor.apellido_paterno }} {{ venta.vendedor.apellido_materno }}</td>
+                    {% load humanize %}
+                    <td><strong>${{ venta.total_venta|intcomma}}</strong></td>
+                    <td>
+                        <a class="btn btn-info" href="{% url 'venta:detalle_venta' venta.id %}">Ver Detalle</a>
+                        
+                    </td>
+                </tr> 
+            {% endfor %}
+        {% else %}
+            <h2>No existen VEntas registradas</h2>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock %}

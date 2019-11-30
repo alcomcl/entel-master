@@ -1,0 +1,104 @@
+{% extends 'base/base.html'%}
+{% load staticfiles %}
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'js/jquery-ui/jquery-ui.min.css' %}" />
+<link rel="stylesheet" href="{% static 'js/jquery-ui/jquery-ui.structure.min.css' %}" />
+<link rel="stylesheet" href="{% static 'js/jquery-ui/jquery-ui.theme.min.css' %}" />
+<script type="text/javascript" src="{% static 'js/jquery-ui/jquery-ui.min.js' %}"></script>
+
+
+{% block title %}Entel - Registro de Usuarios {% endblock %}
+
+{% block content %}
+
+<!--Inicio mensajes de error-->
+{% if form.errors %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<div class="alert alert-danger" role="alert">
+    {{ error|escape }}
+</div>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+<!--Fin mensajes de error-->
+
+<form method="POST">
+    {% csrf_token %}
+    {% if error %}
+    <h2>{{ error }}</h2>
+    {% else %}
+    <div class="card">
+        <div class="card-header">
+            <h2><strong>REGISTRO DE VENDEDORES</strong></h2>
+        </div>
+
+        <div class="card-body card-block">
+            <form action="{% url 'vendedor:crear_vendedor' %}" method="POST" enctype="multipart/form-data"
+                class="form-horizontal">
+
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.nombre.label }}</div>
+                    <div class="col-12 col-md-9">{{ form.nombre }}</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.apellido_paterno.label }}</div>
+                    <div class="col-12 col-md-9">{{ form.apellido_paterno }}</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.apellido_materno.label }}</div>
+                    <div class="col-12 col-md-9">{{ form.apellido_materno }}</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.email.label }}</div>
+                    <div class="col-12 col-md-9">{{ form.email }}</div>
+                </div>
+                <div class="row form-group">
+                    <label for="date">Fecha de Nacimiento</label>
+                    <!--<div class="col-12 col-md-9"></div>-->
+                    <div class="col-12 col-md-9">
+                        <input type="date" id="calendario" class="form-control" name="fecha_nacimiento"
+                        value="{{user.fecha_nacimiento|date:'Y-m-d'}}"
+                        placeholder="" required>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.password1.label }}</div>
+                    <div class="col-12 col-md-9">
+                    <input type="password" class="form-control" name="password1" id="password1" value="{{ form.password1 }}" placeholder="Contraseña" required  >
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.password2.label }}</div>
+                    <div class="col-12 col-md-9"><input type="password" class="form-control" name="password2" id="password2"
+                placeholder="Confirmar Contraseña" required value="{{form.password2}}"></div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">REGISTRAR</button>
+                    <a href="{% url 'vendedor:listar_vendedor' %}" type="reset" class="btn btn-danger">CANCELAR</a>
+                </div>
+        </div>
+    </div>
+</form>
+
+{% endif %}
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css"
+    rel="stylesheet" />
+
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!--Calendario-->
+<script type="text/javascript">
+    $(function () {
+        $('#date').datetimepicker();
+    });
+</script>
+{% endblock %}

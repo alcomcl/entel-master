@@ -1,0 +1,60 @@
+{% extends 'base/base.html'%}
+{% load staticfiles %}
+
+{% block title %}Entel - Ingreso de Productos {% endblock %}
+
+{% block content %}
+
+<!--Inicio mensajes de error-->
+{% if form.errors %}
+    {% for field in form %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error|escape }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<!--Fin mensajes de error-->
+
+<form method="POST">
+    {% csrf_token %}
+    {% if error %}
+        <h2>{{ error }}</h2>
+    {% else %}
+    <div class="card">
+        <div class="card-header">
+            <h2><strong>FORMULARIO INGRESO PRODUCTO</strong></h2>
+        </div>
+        <div class="card-body card-block">
+            <form action="{% url 'producto:crear_producto' %}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.nombre.label }}</div>
+                    <div class="col-12 col-md-9">{{ form.nombre }}</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.precio.label }}</div>
+                    <div class="col-12 col-md-9">{{ form.precio }}</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">{{ form.tipoProducto.label }}</div>
+                    <div class="col-12 col-md-9">{{ form.tipoProducto }}</div>
+                </div>
+                <div class="row form-group">
+                        <div class="col col-md-3">{{ form.imagen.label }}</div>
+                        <div class="col-12 col-md-9">{{ form.imagen }}</div>
+                    </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">GUARDAR PRODUCTO</button>
+                    <a href="{% url 'producto:listar_producto' %}" type="reset" class="btn btn-danger">CANCELAR</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    {% endif %}
+    {% endblock content %}
+</form>
