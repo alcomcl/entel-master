@@ -9,7 +9,22 @@ from django import forms
 from . import models
 import datetime
 from django.utils.timezone import utc
+#********************************************************************
+from rest_framework.views import APIView
+from apps.venta.serializers import VentaSerializer
+import json
+#********************************************************************
+from django.http import HttpResponse
 
+
+class VentaAPI(APIView):
+    serializer = VentaSerializer
+
+    def get(self, request, format=None):
+        lista = Venta.objects.all()
+        response = self.serializer(lista, many=True)
+
+        return HttpResponse(json.dumps(response.data), content_type='application/json')
 
 class VentaCreate(CreateView) :
     model = Venta
