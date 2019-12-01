@@ -6,9 +6,11 @@ from apps.producto.views import ProductoAPI
 
 
 urlpatterns = [
+    #Url Base
+    
 
     # Urls Modelo Producto
-    path('home/',Home.as_view(), name='home'),
+    path('home/base',Home.as_view(), name='home'),
     path('producto/listar_producto/', login_required( ProductoList.as_view() ), name='listar_producto'),
     path('producto/crear_producto/', login_required( ProductoCreate.as_view() ), name='crear_producto'),
     path('producto/editar_producto/<int:pk>', login_required( ProductoUpdate.as_view() ), name='editar_producto'),

@@ -18,6 +18,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin 
 
 
+
 class ProductoAPI(APIView):
     serializer = ProductoSerializer
 
@@ -29,7 +30,7 @@ class ProductoAPI(APIView):
 
 
 class Home(TemplateView):
-    template_name = 'base/index.html'
+    template_name = 'base/base.html'
 
 
 class ProductoList(ListView):

@@ -1,6 +1,9 @@
 {% extends 'base/base.html' %}
 {% load staticfiles %}
 
+{% block Slider %}
+{% endblock %}
+
 {% block content %}
 <p class="titulo-listar-categoria">MANTENEDOR CATEGORIA DE PRODUCTOS : {{ producto.id }}</p>
 <span class="user-ver-vendedor">Usuario Administrador: {{ user.nombre }} {{ user.apellido_paterno }} {{ user.apellido_materno}}</span>

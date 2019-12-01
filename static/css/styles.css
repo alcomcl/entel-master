@@ -98,4 +98,20 @@
 }
 
 */
+
+/***********BASE.HTML********************/
+
+.bx-wrapper{
+    margin-top: 66px;
+    height: 500px !important;
+    margin-bottom: 10px;
+}
+
+.bx-wrapper img{
+    height: 480px;
+    float: left;
+}
+
+
+
     
