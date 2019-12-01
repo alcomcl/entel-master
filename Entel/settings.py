@@ -145,7 +145,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 # Activamos 'CookieStorage' que nos permite enviar los mensajes de respuesta al Crear, Eliminar y Actualizar un registro
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
-LOGIN_REDIRECT_URL = reverse_lazy('venta:crear_venta')
+LOGIN_REDIRECT_URL = reverse_lazy('producto:home')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 LOGIN_URL = reverse_lazy('login')
