@@ -57,7 +57,7 @@
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'producto:home' %}">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#"></a>
@@ -112,7 +112,7 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'producto:home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"></a>
@@ -131,14 +131,16 @@
       </ul>
     </div>
     {% endblock %}
+
+    {% block titulo-base %}<h2>Productos de Tecnologia</h2>{% endblock %}
     {% block Slider %}
       <!--Slider-->
       <div id="slider">
         <div class="galeria">
-            <div><img src="{% static 'img/mouse.jpg' %}" ></div>
-            <div><img src="{% static 'img/smart.jpg' %}" ></div>
-            <div><img src="{% static 'img/samsung-notebook.jpg' %}" ></div>
-            <div><img src="{% static 'img/mejores-celulares-2018.jpg' %}" ></div>
+            <div><img src="{% static 'img/mouse.jpg' %}" title="Accesorios y Perifericos"></div>
+            <div><img src="{% static 'img/smart.jpg' %}" title="Smart TV"></div>
+            <div><img src="{% static 'img/samsung-notebook.jpg' %}" title="Computadores y Tablets"></div>
+            <div><img src="{% static 'img/mejores-celulares-2018.jpg' %}" title="Celulares"></div>
         </div>
         <div id="reloj">
             
