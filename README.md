@@ -1,4 +1,5 @@
 # PROYECTO ENTEL-MASTER
+Venta de articulos electronicos
 
 * **Correo Root**: j.nunez@profesor.duoc.cl
 * **Pass**:        123456
